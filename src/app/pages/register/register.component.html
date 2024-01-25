@@ -1,6 +1,9 @@
 <div class="signup">
   <h6>Sign Up !</h6>
   <form (ngSubmit)="onSignUp()">
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
     <div class="formGroup">
       <input
         type="text"

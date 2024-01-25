@@ -1,9 +1,6 @@
 <div class="startgame">
   <!----------------------------Title-------------------------------->
-  <h1>
-    1
-    <!-- <img src="../../../assets/img/cow.png" alt="" /> -->
-  </h1>
+  <h1>1</h1>
   <!----------------------------Generate Session ID-------------------------------->
   <div class="generatesession">
     <button class="sessionidbtn" (click)="getSessionId()">
@@ -16,17 +13,16 @@
 
   <div class="game_field">
     <div class="game_field_submit">
-      <h1>
-        2
-        <!-- <img src="../../../assets/img/cow.png" alt="" /> -->
-      </h1>
-      <form>
+      <h1>2</h1>
+      <form (ngSubmit)="makeGuess()">
         <div class="formGroup">
           <input
             class="sessionId"
             type="text"
             name="sessionid"
             placeholder="Pass session ID here ..."
+            [(ngModel)]="sessionId"
+            required
           />
         </div>
         <div class="formGroup">
@@ -35,6 +31,8 @@
             type="text"
             name="guessnumber"
             placeholder="Type guess number here ..."
+            [(ngModel)]="userInput"
+            required
           />
         </div>
         <div class="formGroup">
@@ -43,11 +41,12 @@
       </form>
     </div>
     <div class="game_field_result">
-      <h1>
-        3
-        <!-- <img src="../../../assets/img/cow.png" alt="" /> -->
-      </h1>
-      <div class="yourResults"></div>
+      <h1>3</h1>
+
+      <span>{{ gameResultStatus }}</span
+      ><br />
+      <hr />
+      <span>{{ gameResultMessage }}</span>
     </div>
   </div>
 </div>

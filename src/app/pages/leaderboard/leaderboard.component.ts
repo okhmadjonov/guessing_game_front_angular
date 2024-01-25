@@ -4,12 +4,13 @@ import { User } from '../../Models/User';
 import { CommonModule } from '@angular/common';
 
 import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-leaderboard',
   standalone: true,
   imports: [HttpClientModule, CommonModule],
-  providers: [FetchleaderboarddataService],
+  providers: [FetchleaderboarddataService, AuthService],
   templateUrl: './leaderboard.component.html',
   styleUrls: ['./leaderboard.component.scss'],
 })

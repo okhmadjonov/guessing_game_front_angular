@@ -43,6 +43,38 @@
       justify-content: center;
     }
   }
+  .signout_container {
+    width: 500px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0;
+    margin: 0;
+    .loged_user_email {
+      width: 55%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: teal;
+    }
+    .signout {
+      width: 40%;
+      height: 50px;
+      color: white;
+      background-color: teal;
+      border: none;
+      cursor: pointer;
+    }
+    .signout:hover {
+      transition: all 0.3s ease-in-out;
+      background-color: tomato;
+      color: white;
+    }
+  }
   .login_reg {
     width: 200px;
     height: 100%;
