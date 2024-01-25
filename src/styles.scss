@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/ngx-toastr/toastr";
+
+body {
+  font-family: "Roboto", sans-serif;
+
+  font-size: 1.2em;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 400;
+  cursor: pointer;
+}
+li {
+  list-style: none;
+  cursor: pointer;
+  :hover {
+    transition: all 0.3s ease-in-out;
+    color: tomato;
+  }
+}

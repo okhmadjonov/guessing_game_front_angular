@@ -1,0 +1,41 @@
+.homecontainer {
+  width: 100%;
+
+  .title {
+    color: tomato;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    color: #292929;
+    margin-top: 10px;
+  }
+
+  img {
+    width: 60px;
+    height: 60px;
+    margin-left: 20px;
+  }
+
+  h5 img {
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;
+  }
+
+  h6 img {
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;
+  }
+}

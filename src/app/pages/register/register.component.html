@@ -1,0 +1,35 @@
+<div class="signup">
+  <h6>Sign Up !</h6>
+  <form (ngSubmit)="onSignUp()">
+    <div class="formGroup">
+      <input
+        type="text"
+        name="name"
+        placeholder="Username"
+        [(ngModel)]="name"
+        required
+      />
+    </div>
+    <div class="formGroup">
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        [(ngModel)]="email"
+        required
+      />
+    </div>
+    <div class="formGroup">
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        [(ngModel)]="password"
+        required
+      />
+    </div>
+    <div class="formGroup">
+      <button type="submit" class="signupregister">Sign Up</button>
+    </div>
+  </form>
+</div>

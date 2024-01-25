@@ -1,0 +1,78 @@
+.header {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+
+  border-bottom: 1px dotted black;
+  margin-bottom: 10px;
+  color: tomato;
+  justify-content: space-between;
+
+  .logo {
+    width: 150px;
+    height: 100%;
+    display: flex;
+    font-size: 1em;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+
+    align-items: center;
+    justify-content: left;
+  }
+  .logo:hover {
+    transition: all 0.3s ease-in-out;
+    color: tomato;
+  }
+
+  .menu_links {
+    padding: 0;
+    margin: 0;
+    width: 300px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .menu_link {
+      width: 120px;
+      height: 100%;
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .login_reg {
+    width: 200px;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .login {
+      width: 40%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login:hover {
+      transition: all 0.3s ease-in-out;
+      color: tomato;
+    }
+    .register {
+      width: 40%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .register:hover {
+      transition: all 0.3s ease-in-out;
+      color: tomato;
+    }
+  }
+}

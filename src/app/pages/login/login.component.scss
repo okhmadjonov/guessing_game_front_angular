@@ -1,0 +1,51 @@
+.signin {
+  width: 500px;
+  height: 400px;
+  margin: 50px auto;
+
+  h6 {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    color: tomato;
+    font-size: 1.2em;
+    align-items: center;
+    justify-content: center;
+  }
+  form {
+    width: 100%;
+    height: 300px;
+    margin-top: 50px;
+
+    .formGroup {
+      width: 100%;
+      height: 40px;
+      margin-top: 20px;
+      padding: 0 20px 0 20px;
+
+      input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        padding-left: 20px;
+        color: #292929;
+        outline: none !important;
+        border-bottom: 1px solid tomato;
+      }
+      input:hover {
+        border-bottom: 1px solid teal;
+      }
+      .signinlogin {
+        width: 100%;
+        height: 100%;
+        border: none;
+        color: white;
+        background-color: tomato;
+      }
+      .signinlogin:hover {
+        transition: all 0.3s ease-in-out;
+        background-color: teal;
+      }
+    }
+  }
+}
