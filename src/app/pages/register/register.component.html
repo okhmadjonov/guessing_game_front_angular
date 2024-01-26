@@ -1,7 +1,11 @@
 <div class="signup">
   <h6>Sign Up !</h6>
   <form (ngSubmit)="onSignUp()">
-    <div *ngIf="errorMessage" class="error-message">
+    <div
+      *ngIf="errorMessage"
+      class="error-message"
+      style="color: rgb(214, 7, 7); padding-left: 20px; font-size: 0.8em"
+    >
       {{ errorMessage }}
     </div>
     <div class="formGroup">

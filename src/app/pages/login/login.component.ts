@@ -1,13 +1,17 @@
 import { Component, Inject } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-
+import { Router } from '@angular/router';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpErrorResponse,
+} from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, HttpClientModule],
+  imports: [FormsModule, HttpClientModule, CommonModule],
   providers: [AuthService, HttpClient],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -15,26 +19,47 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  errorMessage: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   onSignIn() {
     this.authService.signIn(this.email, this.password).subscribe(
-      (response) => {
-        const token = response?.token;
-        this.email = response?.email;
-        if (token) {
+      (response: any) => {
+        const token = response.token;
+        this.email = response.email;
+        if (token && this.email) {
           this.authService.setToken(token, this.email);
-
           this.email = '';
           this.password = '';
+          this.router.navigate(['/startgame']);
         } else {
           console.error('Invalid response or missing token.');
         }
       },
-      (error) => {
-        console.log('Error: ', error);
+      (error: HttpErrorResponse) => {
+        console.log(error.status, error);
+
+        if (error.status === 401) {
+          this.errorMessage = 'User not registered.';
+        } else if (error.status === 400) {
+          this.handleValidationErrors(error.error.errors);
+        } else {
+          console.error('Unexpected error:', error);
+        }
       }
     );
+  }
+
+  private handleValidationErrors(errors: any) {
+    this.errorMessage = '';
+    for (const key in errors) {
+      if (errors.hasOwnProperty(key)) {
+        const fieldErrors = errors[key];
+        if (Array.isArray(fieldErrors) && fieldErrors.length > 0) {
+          this.errorMessage += `${key}: ${fieldErrors[0]}\n`;
+        }
+      }
+    }
   }
 }

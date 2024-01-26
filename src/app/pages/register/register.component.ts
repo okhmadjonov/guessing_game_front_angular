@@ -41,7 +41,7 @@ export class RegisterComponent {
         if (error.status === 400 && error.error.errors) {
           this.handleValidationErrors(error.error.errors);
         } else {
-          this.errorMessage = 'An error occurred during registration.';
+          this.errorMessage = 'User with this email already exist.';
         }
       }
     );

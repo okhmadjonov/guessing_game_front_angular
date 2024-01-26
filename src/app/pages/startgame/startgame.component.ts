@@ -21,17 +21,26 @@ import {
 })
 export class StartgameComponent {
   sessionId: string = '';
+  sessionIdFrom: string = '';
   userInput: string = '';
-  gameResult: any;
   gameResultMessage: string = '';
   gameResultStatus: string = 'Not Started';
-
+  errorMessage: string = '';
+  attempts: number = 0;
   constructor(private sessionService: SessionserviceService) {}
 
   getSessionId() {
     this.sessionService.getSessionId().subscribe((response: string) => {
-      this.sessionId = response;
-      console.log('Session ID : ' + this.sessionId);
+      if (this.attempts < 9) {
+        this.sessionId = response;
+        this.sessionIdFrom = '';
+        this.userInput = '';
+        this.gameResultStatus = 'Not Started';
+        this.gameResultMessage = '';
+        console.log('Session ID : ' + this.sessionId);
+      } else {
+        this.clearFields();
+      }
     });
   }
 
@@ -40,11 +49,22 @@ export class StartgameComponent {
       (results: Ires) => {
         this.gameResultMessage = results.message;
         this.gameResultStatus = results.status;
+        this.userInput = '';
+        this.errorMessage = '';
+        this.attempts++;
+        if (this.attempts >= 8) {
+          this.clearFields();
+        }
         console.log(results);
       },
-      (error) => {
-        console.log('Error making guess:', error);
+      (error: HttpErrorResponse) => {
+        this.errorMessage = error.error;
       }
     );
+  }
+
+  clearFields() {
+    this.sessionId = '';
+    this.userInput = '';
   }
 }
