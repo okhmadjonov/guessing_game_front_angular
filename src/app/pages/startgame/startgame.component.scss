@@ -24,8 +24,9 @@
     height: 70px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     margin-top: 40px;
+    margin-left: 20px;
     gap: 20px;
   }
   .sessionidbtn {
@@ -98,7 +99,7 @@
           border: none;
           cursor: pointer;
           color: white;
-          margin-left: 150px;
+          margin-left:20px;
           background-color: tomato;
         }
         .guessNumberApply:hover {

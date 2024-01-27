@@ -1,15 +1,20 @@
 <div class="startgame">
-  <!----------------------------Title-------------------------------->
+  <!-- Title -->
   <h1>1</h1>
-  <!----------------------------Generate Session ID-------------------------------->
+
   <div class="generatesession">
     <button class="sessionidbtn" (click)="getSessionId()">
       Generate session ID
     </button>
-    <p class="sessionidResult">{{ sessionId }}</p>
+    <div
+      *ngIf="errorMessageSession"
+      class="error-message"
+      style="color: rgb(214, 7, 7); padding-left: 20px; font-size: 0.8em"
+    >
+      {{ errorMessageSession }}
+    </div>
   </div>
   <hr />
-  <!----------------------------Submit session id and random guessed number-------------------------------->
 
   <div class="game_field">
     <div class="game_field_submit">
@@ -20,7 +25,7 @@
             class="sessionId"
             type="text"
             name="sessionid"
-            placeholder="You session ID here ..."
+            placeholder="Your session ID here ..."
             required
             value="{{ sessionId }}"
             disabled
@@ -36,23 +41,24 @@
         <div class="formGroup">
           <input
             class="guessNumber"
-            type="number"
+            type="text"
             name="guessnumber"
             placeholder="Type guess number here ..."
-            [(ngModel)]="userInput"
+            [(ngModel)]="Userinput"
             required
             maxlength="4"
-            minlength="4"
+            pattern="[0-9]*"
           />
         </div>
+
         <div class="formGroup">
           <button class="guessNumberApply" type="submit">Guess Number</button>
         </div>
       </form>
     </div>
+
     <div class="game_field_result">
       <h1>3</h1>
-
       <span>{{ gameResultStatus }}</span
       ><br />
       <hr />

@@ -9,13 +9,13 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, CommonModule, HttpClientModule],
+  imports: [FormsModule, CommonModule, HttpClientModule, RouterLink],
   providers: [AuthService, HttpClient],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
@@ -53,7 +53,7 @@ export class RegisterComponent {
       if (errors.hasOwnProperty(key)) {
         const fieldErrors = errors[key];
         if (Array.isArray(fieldErrors) && fieldErrors.length > 0) {
-          this.errorMessage += `${key}: ${fieldErrors[0]}\n`;
+          this.errorMessage += `${fieldErrors[0]}\n`;
         }
       }
     }

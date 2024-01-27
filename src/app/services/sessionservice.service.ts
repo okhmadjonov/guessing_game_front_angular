@@ -3,6 +3,7 @@ export interface Ires {
   status: string;
   message: string;
 }
+import { Router } from '@angular/router';
 import {
   HttpClient,
   HttpClientModule,
@@ -15,9 +16,14 @@ import { AuthService } from './auth.service';
 })
 export class SessionserviceService {
   private sessionUrl = 'https://localhost:7025/api/Game';
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private route: Router
+  ) {}
 
   getSessionId(): Observable<string> {
+  
     const token = this.authService.getToken().token;
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<string>(this.sessionUrl, { headers });

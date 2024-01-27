@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
   HttpClient,
   HttpClientModule,
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, HttpClientModule, CommonModule],
+  imports: [FormsModule, HttpClientModule, CommonModule, RouterLink],
   providers: [AuthService, HttpClient],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -57,7 +57,7 @@ export class LoginComponent {
       if (errors.hasOwnProperty(key)) {
         const fieldErrors = errors[key];
         if (Array.isArray(fieldErrors) && fieldErrors.length > 0) {
-          this.errorMessage += `${key}: ${fieldErrors[0]}\n`;
+          this.errorMessage += `${fieldErrors[0]}\n`;
         }
       }
     }
