@@ -17,20 +17,28 @@
   </h6>
 
   <h6>
-    2. Then go to the start game menu, there click the button to generate the
-    session ID.
+    2. Then go to the home page, there click the start button to start the game.
   </h6>
-  <h6>3. Below there are two fields to insert session ID and guess number.</h6>
+  <h6>3. It will direct to the start game page.</h6>
+
   <h6>
-    4. Then, generated session ID would place automaticaly in session ID fields
-    and write your guessed number.
-  </h6>
-  <h6>
-    5. Click guess button, then you will see your result win or lose, according
-    to result you will continue.
+    4. Type numbers, click guess button, then you will see your results below,
+    according to your result you will continue.
   </h6>
   <h6 style="margin-top: 50px; color: tomato; font-weight: 500">
     Hope, you understand how to play the game, good luck !!!
     <img src="../../../assets/img/cat.png" alt="Cat" />
   </h6>
+
+  <hr />
+  <div class="generatesession">
+    <button class="sessionidbtn" (click)="getSessionId()">Start</button>
+    <div
+      *ngIf="errorMessageSession"
+      class="error-message"
+      style="color: rgb(214, 7, 7); padding-left: 20px; font-size: 0.8em"
+    >
+      {{ errorMessageSession }}
+    </div>
+  </div>
 </div>

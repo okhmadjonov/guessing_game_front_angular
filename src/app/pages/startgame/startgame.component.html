@@ -1,68 +1,57 @@
 <div class="startgame">
-  <!-- Title -->
-  <h1>1</h1>
-
-  <div class="generatesession">
-    <button class="sessionidbtn" (click)="getSessionId()">
-      Generate session ID
-    </button>
-    <div
-      *ngIf="errorMessageSession"
-      class="error-message"
-      style="color: rgb(214, 7, 7); padding-left: 20px; font-size: 0.8em"
-    >
-      {{ errorMessageSession }}
-    </div>
-  </div>
-  <hr />
-
   <div class="game_field">
     <div class="game_field_submit">
-      <h1>2</h1>
+      <div class="formGroup" style="display: none">
+        <input
+          class="sessionId"
+          type="text"
+          name="sessionid"
+          placeholder="Your session ID here ..."
+          required
+          value="{{ sessionId }}"
+          disabled
+        />
+      </div>
+      <div
+        *ngIf="errorMessage"
+        class="error-message"
+        style="color: rgb(214, 7, 7); padding-left: 20px; font-size: 0.8em"
+      >
+        {{ errorMessage }}
+      </div>
       <form (ngSubmit)="makeGuess()">
-        <div class="formGroup">
-          <input
-            class="sessionId"
-            type="text"
-            name="sessionid"
-            placeholder="Your session ID here ..."
-            required
-            value="{{ sessionId }}"
-            disabled
-          />
+        <div class="formGroup numberDisplay">
+          <div *ngFor="let index of [1, 2, 3, 4]" class="formInputGroup">
+            <div class="formGroup">
+              <input
+                class="guessNumber"
+                type="text"
+                name="guessnumber{{ index }}"
+                placeholder="..."
+                [(ngModel)]="Userinput[index - 1]"
+                required
+                maxlength="1"
+                (input)="onInput($event)"
+              />
+            </div>
+          </div>
         </div>
-        <div
-          *ngIf="errorMessage"
-          class="error-message"
-          style="color: rgb(214, 7, 7); padding-left: 20px; font-size: 0.8em"
-        >
-          {{ errorMessage }}
-        </div>
-        <div class="formGroup">
-          <input
-            class="guessNumber"
-            type="text"
-            name="guessnumber"
-            placeholder="Type guess number here ..."
-            [(ngModel)]="Userinput"
-            required
-            maxlength="4"
-            pattern="[0-9]*"
-          />
-        </div>
-
+        <br />
         <div class="formGroup">
           <button class="guessNumberApply" type="submit">Guess Number</button>
         </div>
       </form>
     </div>
-
     <div class="game_field_result">
-      <h1>3</h1>
-      <span>{{ gameResultStatus }}</span
-      ><br />
+      <span>{{ gameResultStatus }}</span>
       <hr />
-      <span>{{ gameResultMessage }}</span>
+      <div
+        class="resultDesc"
+        style="margin-bottom: 20px"
+        *ngFor="let message of gameResultMessages"
+      >
+        {{ message }}
+      </div>
     </div>
   </div>
 </div>

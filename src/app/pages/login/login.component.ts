@@ -32,14 +32,12 @@ export class LoginComponent {
           this.authService.setToken(token, this.email);
           this.email = '';
           this.password = '';
-          this.router.navigate(['/startgame']);
+          this.router.navigate(['/']);
         } else {
           console.error('Invalid response or missing token.');
         }
       },
       (error: HttpErrorResponse) => {
-        console.log(error.status, error);
-
         if (error.status === 401) {
           this.errorMessage = 'User not registered.';
         } else if (error.status === 400) {
@@ -52,7 +50,6 @@ export class LoginComponent {
   }
 
   private handleValidationErrors(errors: any) {
-    this.errorMessage = '';
     for (const key in errors) {
       if (errors.hasOwnProperty(key)) {
         const fieldErrors = errors[key];

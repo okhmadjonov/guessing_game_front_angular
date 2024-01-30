@@ -1,88 +1,50 @@
 .startgame {
   width: 100%;
   height: auto;
-
-  h1 {
-    font-size: 2em;
-    color: white;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    font-weight: 400;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background-color: tomato;
-    // img {
-    //   width: 40px;
-    //   height: 40px;
-    //   margin-left: 20px;
-    // }
-  }
-  .generatesession {
-    width: 100%;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-top: 40px;
-    margin-left: 20px;
-    gap: 20px;
-  }
-  .sessionidbtn {
-    width: 300px;
-    height: 40px;
-    border: none;
-    cursor: pointer;
-    color: white;
-    background-color: tomato;
-  }
-  .sessionidbtn:hover {
-    transition: all 0.3s ease-in-out;
-    background-color: teal;
-    color: white;
-  }
-  .sessionidResult {
-    width: 450px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 15px;
-    color: teal;
-    font-size: 1.1em;
-    font-weight: 500;
-    border-bottom: 1px solid tomato;
-  }
-
-  // Start gamer
-
   .game_field {
     width: 100%;
     height: auto;
     display: flex;
+    flex-direction: column;
     align-items: center;
     padding: 0;
     margin: 0;
     justify-content: space-between;
+
+    .error-message {
+      width: 100%;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .game_field_submit {
-      width: 45%;
-      height: 300px;
+      width: 100%;
+      height: 180px;
+      display: flex;
+      flex-direction: column;
 
       form {
         width: 100%;
         height: 80%;
-        margin-top: 20px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        align-items: center;
+        justify-content: center;
 
         .formGroup {
+          width: 100%;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
           label {
             margin-left: 20px;
           }
           input {
-            width: 90%;
+            width: 100px;
             height: 40px;
             border: none;
             padding-left: 20px;
@@ -99,7 +61,7 @@
           border: none;
           cursor: pointer;
           color: white;
-          margin-left:20px;
+          margin-left: 20px;
           background-color: tomato;
         }
         .guessNumberApply:hover {
@@ -110,34 +72,19 @@
       }
     }
     .game_field_result {
-      width: 52%;
-      height: 300px;
+      width: 50%;
+      margin: 0 auto;
+      height: auto;
+      overflow: hidden;
+      margin-bottom: 100px;
 
-      .yourResults {
-        width: 90%;
-        height: 250px;
-        margin: 15px 0 0 35px;
+      .resultDesc {
+        width: 100%;
+        height: auto;
+        font-size: 0.8em;
+
         border-bottom: 1px dotted tomato;
       }
     }
   }
 }
-
-// h6 {
-//   width: 50px;
-//   height: 50px;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   font-size: 2em;
-//   font-weight: 400;
-//   border-radius: 50%;
-//   background-color: tomato;
-//   color: white;
-
-// img {
-//   width: 35px;
-//   height: 35px;
-//   margin-left: 20px;
-// }
-// }

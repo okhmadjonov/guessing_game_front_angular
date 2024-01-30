@@ -16,14 +16,9 @@ import { AuthService } from './auth.service';
 })
 export class SessionserviceService {
   private sessionUrl = 'https://localhost:7025/api/Game';
-  constructor(
-    private http: HttpClient,
-    private authService: AuthService,
-    private route: Router
-  ) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getSessionId(): Observable<string> {
-  
     const token = this.authService.getToken().token;
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<string>(this.sessionUrl, { headers });

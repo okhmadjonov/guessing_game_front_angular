@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   Ires,
   SessionserviceService,
@@ -21,78 +21,52 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './startgame.component.html',
   styleUrls: ['./startgame.component.scss'],
 })
-export class StartgameComponent {
+export class StartgameComponent implements OnInit {
   sessionId: string = '';
-  sessionIdFrom: string = '';
-  Userinput: string = '';
-  gameResultMessage: string = '';
-  gameResultStatus: string = 'Not Started';
+  Userinput: string[] = ['', '', '', ''];
+  gameResultMessages: string[] = [];
+  gameResultStatus: string = 'Results';
   errorMessage: string = '';
   errorMessageSession: string = '';
   attempts: number = 0;
-  checkClickError: string = '';
+
   constructor(
     private sessionService: SessionserviceService,
     private authService: AuthService,
-
+    private route: ActivatedRoute,
     private router: Router
   ) {}
 
-  getSessionId() {
-    // if (!this.authService.getToken()) {
-    //   this.errorMessage = 'Please Sign in or Sign up first!';
-    //   setTimeout(() => {
-    //     this.router.navigate(['/login']);
-    //   }, 3000);
-    // }
-
-    if (!this.authService.getToken()) {
-      let seconds = 5;
-      const updateTimer = () => {
-        seconds--;
-        if (seconds > 0) {
-          this.errorMessageSession = `Please Sign in or Sign up first! ,  ${seconds} seconds...`;
-          setTimeout(updateTimer, 1000);
-        } else {
-          this.router.navigate(['/login']);
-        }
-      };
-
-      updateTimer();
-      console.log('SeessionError: ' + this.errorMessageSession);
-      return;
-    }
-
-    this.sessionService.getSessionId().subscribe((response: string) => {
-      if (this.attempts < 9) {
-        this.sessionId = response;
-        this.sessionIdFrom = '';
-        this.Userinput = '';
-        this.gameResultStatus = 'Not Started';
-        this.gameResultMessage = '';
-        console.log('Session ID : ' + this.sessionId);
-      } else {
-        this.clearFields();
-      }
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.sessionId = params['sessionId'];
     });
   }
 
   makeGuess() {
     if (!this.sessionId) {
-      this.errorMessage = 'Please, generate session ID first !';
+      this.errorMessage = 'Please, click start button on the home page first!';
       return;
     }
 
-    if (!this.Userinput) {
-      this.errorMessage = 'Guess number are required.';
+    if (this.Userinput.some((digit) => !/\d/.test(digit))) {
+      this.errorMessage = 'All digits must be filled!';
+      return;
+    }
+
+    if (this.Userinput.some((digit) => digit === '')) {
+      this.errorMessage = 'All digits must be filled!';
       return;
     }
 
     this.errorMessage = '';
-    this.sessionService.makeGuess(this.sessionId, this.Userinput).subscribe(
+    const guessNumber = this.Userinput.join('');
+    
+    this.sessionService.makeGuess(this.sessionId, guessNumber).subscribe(
       (results: Ires) => {
-        this.gameResultMessage = results.message;
+        this.gameResultMessages.push(results.message);
         this.gameResultStatus = results.status;
+        console.log('Game Result Message: ' + this.gameResultMessages);
         this.attempts++;
         if (this.attempts >= 8) {
           this.clearFields();
@@ -103,11 +77,18 @@ export class StartgameComponent {
           this.errorMessage = error.error;
           this.handleValidationErrors(error.error.errors);
         } else {
-          // Handle other errors
           this.errorMessage = error.error;
         }
       }
     );
+  }
+  onInput(event: any) {
+    let value = event.target.value;
+    value = value.replace(/[^0-9]/g, '');
+    event.target.value = value;
+    const index = event.target.name.slice(-1);
+
+    this.Userinput[index - 1] = value;
   }
 
   private handleValidationErrors(errors: any) {
@@ -123,14 +104,6 @@ export class StartgameComponent {
 
   clearFields() {
     this.sessionId = '';
-    this.Userinput = '';
-  }
-
-  onInputChange(event: any) {
-    const enteredValue = event.target.value;
-    const pattern = /^[0-9]*$/;
-    if (!pattern.test(enteredValue)) {
-      this.Userinput = enteredValue.replace(/\D/g, '');
-    }
+    this.Userinput = ['', '', '', ''];
   }
 }
