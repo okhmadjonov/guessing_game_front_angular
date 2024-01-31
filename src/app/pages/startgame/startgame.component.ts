@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  Ires,
-  SessionserviceService,
-} from '../../services/sessionservice.service';
+import { SessionserviceService } from '../../services/sessionservice.service';
 import {
   HttpClient,
   HttpClientModule,
@@ -61,9 +58,9 @@ export class StartgameComponent implements OnInit {
 
     this.errorMessage = '';
     const guessNumber = this.Userinput.join('');
-    
+
     this.sessionService.makeGuess(this.sessionId, guessNumber).subscribe(
-      (results: Ires) => {
+      (results: any) => {
         this.gameResultMessages.push(results.message);
         this.gameResultStatus = results.status;
         console.log('Game Result Message: ' + this.gameResultMessages);

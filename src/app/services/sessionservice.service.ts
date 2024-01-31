@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-export interface Ires {
-  status: string;
-  message: string;
-}
+// export interface Ires {
+//   status: string;
+//   message: string;
+// }
 import { Router } from '@angular/router';
 import {
   HttpClient,
@@ -24,10 +24,10 @@ export class SessionserviceService {
     return this.http.get<string>(this.sessionUrl, { headers });
   }
 
-  makeGuess(sessionId: string, userInput: string): Observable<Ires> {
+  makeGuess(sessionId: string, userInput: string): Observable<any> {
     const url = `https://localhost:7025/api/Game/guess/${sessionId}?userInput=${userInput}`;
     const token = this.authService.getToken().token;
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post<Ires>(url, null, { headers });
+    return this.http.post<any>(url, null, { headers });
   }
 }
